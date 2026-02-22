@@ -190,17 +190,17 @@
         }
 
         .majestic-card {
-            flex: 1.5;
-            max-width: 600px;
-            width: 100%;
+            width: fit-content;
+            margin: 0 auto;
             position: relative;
             background: var(--color-white);
-            padding: 40px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
             border: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.5s ease;
         }
 
         .majestic-card img {
@@ -211,9 +211,15 @@
             z-index: 1;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 768px) {
+            :root {
+                --spacing-lg: 4rem;
+                --spacing-md: 3rem;
+                --spacing-sm: 1.5rem;
+            }
+
             .majestic-invite-section {
-                padding: 6rem 1.5rem;
+                padding: var(--spacing-lg) var(--spacing-sm);
             }
 
             .majestic-container {
@@ -228,53 +234,86 @@
                 padding: 0 1rem;
             }
 
+            .majestic-premium-text h2 {
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
+            }
+
             .majestic-card {
-                padding: 25px;
-                max-width: 100%;
-                width: calc(100vw - 3rem);
-                margin: 0 auto;
+                padding: 8px;
+                width: 100%;
             }
 
-            .majestic-card::before {
-                top: 15px;
-                left: 15px;
-                right: 15px;
-                bottom: 15px;
-            }
-
+            .majestic-card::before,
             .majestic-card::after {
-                top: 19px;
-                left: 19px;
-                right: 19px;
-                bottom: 19px;
+                display: none;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 12vw, 3.5rem) !important;
+                letter-spacing: 5px !important;
+            }
+
+            .hero-date {
+                font-size: 0.95rem !important;
+            }
+
+            .editorial-heading {
+                font-size: clamp(1.6rem, 10vw, 2.2rem) !important;
+            }
+
+            .editorial-text {
+                padding: 2rem 1rem !important;
+            }
+
+            .invitation-details-section {
+                padding: 4rem 0 !important;
+            }
+
+            .lux-border {
+                padding: 1.5rem !important;
+                width: calc(100% - 2rem) !important;
+                margin: 0 auto !important;
+            }
+
+            .lux-border span {
+                font-size: 1.25rem !important;
+            }
+
+            .rsvp-form-card h2 {
+                font-size: 1.8rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .rsvp-form-card p {
+                margin-bottom: 2rem !important;
+                font-size: 0.9rem;
+            }
+
+            .cool-val {
+                font-size: 2.2rem !important;
+            }
+
+            .cool-label {
+                font-size: 0.6rem !important;
+                letter-spacing: 2px !important;
+            }
+
+            .cool-countdown-grid {
+                gap: 1.5rem !important;
             }
         }
 
         .majestic-card::before {
             content: "";
             position: absolute;
-            top: 25px;
-            left: 25px;
-            right: 25px;
-            bottom: 25px;
-            border: 1px solid var(--color-accent);
-            opacity: 0.4;
+            inset: 0;
+            border: 1px solid rgba(0, 0, 0, 0.03);
             pointer-events: none;
             z-index: 3;
         }
 
-        /* Subtle Inner Frame */
         .majestic-card::after {
-            content: "";
-            position: absolute;
-            top: 32px;
-            left: 32px;
-            right: 32px;
-            bottom: 32px;
-            border: 0.5px solid var(--color-noir);
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 2;
+            display: none;
         }
 
         /* ORNATE CORNERS */
@@ -349,12 +388,15 @@
         .cool-countdown-section {
             background-color: var(--color-noir);
             color: var(--color-white);
-            padding: 6rem 0;
+            padding: 10rem 0;
+            /* Slightly more padding for the effect */
             position: relative;
             overflow: hidden;
             text-align: center;
             border-top: 1px solid var(--color-accent);
             border-bottom: 1px solid var(--color-accent);
+            z-index: 1;
+            /* Lower z-index for reveal */
         }
 
         .cool-countdown-grid {
@@ -1011,10 +1053,10 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-image: url('kkgb.jpg');
+            background-image: url('a few iPhone 📸’s of this winter-inspired magical wedding staircase design at The Savile Club fo.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.07;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 1;
             filter: grayscale(100%) brightness(1.2);
@@ -1112,18 +1154,20 @@
             color: #666;
         }
 
-        /* --- VENUE --- */
         .venue-section {
             padding: var(--spacing-lg) 0;
             background: var(--color-white);
             position: relative;
             overflow: hidden;
+            z-index: 10;
+            /* Higher than pinned countdown */
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
+            /* Add a shadow to emphasize 'coming over' */
         }
 
-        .venue-section::before {
-            content: "";
+        .venue-parallax-bg {
             position: absolute;
-            inset: 0;
+            inset: -20% 0;
             background-image: url('kkgb.jpg');
             background-size: cover;
             background-position: center;
@@ -1218,7 +1262,6 @@
 
             .venue-map-mini {
                 height: 300px;
-                order: -1;
             }
         }
 
@@ -1316,7 +1359,7 @@
 
         .editorial-heading {
             font-family: var(--font-serif);
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
             line-height: 1.2;
             margin-bottom: 2rem;
             color: var(--color-noir);
@@ -1344,8 +1387,8 @@
         }
 
         .gallery-column {
-            flex: 25%;
-            max-width: 25%;
+            flex: 33.33%;
+            max-width: 33.33%;
             padding: 0 10px;
         }
 
@@ -1353,15 +1396,22 @@
             margin-top: 20px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(139, 115, 85, 0.15);
-            background: #eee;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .gallery-item img {
             width: 100%;
             display: block;
-            transition: transform 1.5s ease;
-            filter: grayscale(100%);
+            transition: all 1s ease;
+            filter: grayscale(100%) brightness(0.9);
         }
 
         .gallery-item:hover img {
@@ -1399,6 +1449,19 @@
             .gallery-column {
                 flex: 50%;
                 max-width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .gallery-column {
+                flex: 100%;
+                max-width: 100%;
+            }
+
+            .gallery-item.tall,
+            .gallery-item.med,
+            .gallery-item.short {
+                height: 400px;
             }
         }
 
@@ -1772,6 +1835,7 @@
             <ul class="nav-list">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#story">Our Story</a></li>
+                <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#location">Venue</a></li>
                 <li><a href="#rsvp">RSVP</a></li>
@@ -1781,7 +1845,7 @@
         <main>
             <!-- HERO -->
             <section class="hero" id="home">
-                <img src="IMG-20260218-WA0043.jpg" class="hero-video-bg" alt="Hero Background"
+                <img src="IMG-20260222-WA0010.jpg" class="hero-video-bg" alt="Hero Background"
                     style="filter: grayscale(100%) contrast(1.2) brightness(0.6);">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
@@ -1804,12 +1868,12 @@
                     <div class="majestic-premium-text reveal">
                         <span class="editorial-label" style="margin-left: 0;">Our Story</span>
                         <h2>A Promise<br>Of Forever</h2>
-                        <p>God's promises never fail, and this love is living proof. Through seven years of laughter,
-                            patience, faith and cherished memories, we have grown together and now, we decide to begin
-                            our forever.</p>
+                        <p>God's promises never fail, and this love is living proof. Through seven years of laughter
+                            patience, faith, and cherished memories, we have grown together, and now we have decided to
+                            begin our forever.</p>
                     </div>
                     <div class="majestic-card reveal">
-                        <img src="IMG-20260218-WA0068.jpg" alt="Wedding Invitation">
+                        <img src="IMG-20260218-WA0068.jpg" alt="Wedding Invitation" style="max-height: 80vh;">
                     </div>
                 </div>
             </section>
@@ -1832,9 +1896,9 @@
 
                             <div style="margin: 3rem 0;">
                                 <h3
-                                    style="font-family: var(--font-script); font-size: clamp(3.5rem, 8vw, 6rem); color: var(--color-accent); line-height: 0.8; font-weight: 400; margin-bottom: 0.5rem;">
+                                    style="font-family: var(--font-script); font-size: clamp(2.2rem, 8vw, 5rem); color: var(--color-accent); line-height: 0.8; font-weight: 400; margin-bottom: 0.5rem;">
                                     Chalani <span
-                                        style="font-family: var(--font-serif); font-size: 2.2rem; vertical-align: middle; color: var(--color-noir);">&</span>
+                                        style="font-family: var(--font-serif); font-size: 1.8rem; vertical-align: middle; color: var(--color-noir);">&</span>
                                     Chamika
                                 </h3>
                                 <div
@@ -1844,12 +1908,12 @@
 
                             <div style="font-family: var(--font-serif); margin-bottom: 4rem;">
                                 <p
-                                    style="font-size: 1.8rem; letter-spacing: 2px; color: var(--color-noir); margin-bottom: 1rem;">
+                                    style="font-size: 1.4rem; letter-spacing: 2px; color: var(--color-noir); margin-bottom: 1rem;">
                                     Thursday, the 14th of May
                                 </p>
                                 <p
                                     style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.9rem; color: var(--color-accent); font-family: var(--font-body); margin-bottom: 1.5rem;">
-                                    Two Thousand Twenty-Six
+                                    2026
                                 </p>
                                 <p style="font-size: 1.1rem; color: #666; font-style: italic;">
                                     Negombo, Sri Lanka
@@ -1862,7 +1926,7 @@
                                     The Majestic</span>
                                 <span
                                     style="font-size: 1.8rem; font-family: var(--font-serif); color: var(--color-noir);">Grandeeza
-                                    Luxury Hotel</span>
+                                    Hotel</span>
                             </div>
 
                             <p
@@ -1874,7 +1938,76 @@
                         <div class="editorial-img-wrapper reveal" style="position: relative;">
                             <div class="majestic-card">
                                 <img src="IMG-20260218-WA0056.jpg" class="editorial-img" alt="The Couple"
-                                    style="height: auto; max-height: 70vh; width: 100%; object-fit: cover;">
+                                    style="max-height: 80vh;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE / ORDER OF EVENTS -->
+            <section class="timeline-section" id="schedule">
+                <div class="container">
+                    <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
+                        <span class="editorial-label">The Day's Flow</span>
+                        <h2 class="editorial-heading">Order of Events</h2>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-line"></div>
+
+                        <!-- Event 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content reveal">
+                                <span class="timeline-time">06:30 PM</span>
+                                <h3 class="timeline-title">Reception Begins</h3>
+                                <p class="timeline-desc">The celebration begins with drinks, dancing, and good company.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Event 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content reveal">
+                                <span class="timeline-time">07:00 PM</span>
+                                <h3 class="timeline-title">Toasts and Cheers</h3>
+                                <p class="timeline-desc">Let's raise our glasses to love, laughter, and happily ever
+                                    after.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 3 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content reveal">
+                                <span class="timeline-time">08:30 PM</span>
+                                <h3 class="timeline-title">Dinner</h3>
+                                <p class="timeline-desc">Indulge in a delicious meal, carefully prepared to delight your
+                                    senses.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 4 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content reveal">
+                                <span class="timeline-time">09:30 PM</span>
+                                <h3 class="timeline-title">Dancing & Celebration</h3>
+                                <p class="timeline-desc">Let the music move you! We’ll keep the dance floor alive with
+                                    joy and laughter.</p>
+                            </div>
+                        </div>
+
+                        <!-- Event 5 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content reveal">
+                                <span class="timeline-time">11:30 PM</span>
+                                <h3 class="timeline-title">Send-Off</h3>
+                                <p class="timeline-desc">As the night winds down, we’ll share one last special moment as
+                                    we begin our forever</p>
                             </div>
                         </div>
                     </div>
@@ -1906,7 +2039,7 @@
                     </div>
 
                     <div class="calendar-btn-wrap">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Chalani+%26+Chamika&dates=20260514T040000Z/20260514T170000Z&details=We+are+delighted+to+invite+you+to+our+wedding+celebration.&location=Grandeeza+Luxury+Hotel%2C+Negombo"
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Chalani+%26+Chamika&dates=20260514T040000Z/20260514T170000Z&details=We+are+delighted+to+invite+you+to+our+wedding+celebration.&location=Grandeeza+Hotel%2C+Negombo"
                             target="_blank" class="cool-btn">
                             <span class="material-icons-outlined"
                                 style="vertical-align: middle; margin-right: 8px;">event</span>
@@ -1920,11 +2053,12 @@
 
             <!-- VENUE SECTION -->
             <section class="venue-section" id="location">
+                <div class="venue-parallax-bg"></div>
                 <div class="container">
                     <div class="venue-grid">
                         <div class="venue-card reveal">
                             <span class="editorial-label">The Venue</span>
-                            <h2 class="editorial-heading">Grandeeza Luxury Hotel</h2>
+                            <h2 class="editorial-heading">Grandeeza Hotel</h2>
                             <p class="editorial-p">
                                 772, Colombo Road, Kurana, Negombo 11500, Sri Lanka.<br><br>
                                 A majestic oceanside landmark where we will share our vows and celebrate with those we
@@ -1951,40 +2085,31 @@
                     <div class="gallery-row">
                         <!-- Column 1 -->
                         <div class="gallery-column">
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0017.jpg"
-                                    alt="Moment 1"></div>
-                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0062.jpg"
-                                    alt="Moment 5"></div>
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0043.jpg"
-                                    alt="Moment 9"></div>
+                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0017.jpg" alt="Moment 1">
+                            </div>
+                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0062.jpg" alt="Moment 5">
+                            </div>
+                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0043.jpg" alt="Moment 9">
+                            </div>
 
                         </div>
                         <!-- Column 2 -->
                         <div class="gallery-column">
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0064.jpg"
-                                    alt="Moment 2"></div>
-                            <div class="gallery-item reveal short"><img src="IMG-20260218-WA0066.jpg"
-                                    alt="Moment 6"></div>
-                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0048.jpg"
-                                    alt="Moment 10"></div>
+                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0064.jpg" alt="Moment 2">
+                            </div>
+                            <div class="gallery-item reveal short"><img src="IMG-20260218-WA0066.jpg" alt="Moment 6">
+                            </div>
+                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0048.jpg" alt="Moment 10">
+                            </div>
                         </div>
                         <!-- Column 3 -->
                         <div class="gallery-column">
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0058.jpg"
-                                    alt="Moment 3"></div>
-                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0056.jpg"
-                                    alt="Moment 7"></div>
-                            <div class="gallery-item reveal short"><img src="IMG-20260218-WA0047.jpg"
-                                    alt="Moment 11"></div>
-                        </div>
-                        <!-- Column 4 -->
-                        <div class="gallery-column">
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0060.jpg"
-                                    alt="Moment 4"></div>
-                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0052.jpg"
-                                    alt="Moment 8"></div>
-                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0004.jpg"
-                                    alt="Moment 12"></div>
+                            <div class="gallery-item reveal med"><img src="IMG-20260218-WA0058.jpg" alt="Moment 3">
+                            </div>
+                            <div class="gallery-item reveal tall"><img src="IMG-20260218-WA0056.jpg" alt="Moment 7">
+                            </div>
+                            <div class="gallery-item reveal short"><img src="IMG-20260218-WA0047.jpg" alt="Moment 11">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2204,6 +2329,16 @@
                     },
                 });
 
+                // Pin Countdown (Reveal Parallax)
+                ScrollTrigger.create({
+                    trigger: ".cool-countdown-section",
+                    start: "top top",
+                    pin: true,
+                    pinSpacing: false,
+                    scrub: true,
+                    zIndex: 1
+                });
+
                 // Batch reveal items for better performance
                 gsap.utils.toArray('.reveal').forEach((el, i) => {
                     gsap.fromTo(el,
@@ -2230,11 +2365,23 @@
                         ease: "none",
                         scrollTrigger: {
                             trigger: img,
-                            scrub: 1, // Smooth scrolling
+                            scrub: 1,
                             start: "top bottom",
                             end: "bottom top"
                         }
                     });
+                });
+
+                // Venue Background Parallax
+                gsap.to('.venue-parallax-bg', {
+                    yPercent: 20,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: '.venue-section',
+                        scrub: true,
+                        start: "top bottom",
+                        end: "bottom top"
+                    }
                 });
 
                 // --- COUNTDOWN LOGIC ---
@@ -2328,4 +2475,3 @@
 </body>
 
 </html>
-
