@@ -473,383 +473,218 @@
             }
         }
 
-        /* --- NEW ENVELOPE STYLES --- */
-        :root {
-            --envelope-x: 85vw;
-            --envelope-y: 56.6vw;
-            /* 3:2 ratio */
-            --envelope-bg: #f9f7f2;
-            --envelope-shadow: rgba(0, 0, 0, 0.1);
-            --letter-x: 75vw;
-            --letter-y: 50vw;
-            --letter-bg: #111111;
-            --letter-shadow: #000;
-            --letter-text: #ffffff;
-            --letter-font: "Cinzel", serif;
-            --letter-button-text: #8b7355;
-            --heart-bg: #8b7355;
-            --heart-text: white;
-        }
-
-        @media (min-width: 650px) {
-            :root {
-                --envelope-x: 600px;
-                --envelope-y: 400px;
-                --letter-x: 500px;
-                --letter-y: 380px;
-            }
-        }
-
+        /* --- NEW 3D IMAGE ENVELOPE STYLES --- */
         .cssletter {
             position: fixed;
-            /* Changed to fixed to overlay */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 9999;
-            background-color: #000;
-            /* Match site theme or keep darkred from dist? kept site theme */
+            z-index: 100000;
+            background-color: #ffffff;
+            /* Fallback */
             display: flex;
             align-items: center;
             justify-content: center;
-            user-select: none;
-            -webkit-user-select: none;
-            margin: 0;
-            /* Changed from 24dvh 0 */
-        }
-
-        .envelope {
-            position: relative;
-            width: var(--envelope-x);
-            height: var(--envelope-y);
-            background: var(--envelope-bg);
-            box-shadow: inset 0 0 30px -5px var(--envelope-shadow), 0 0 50vw 0 #05140D;
-            /* Adjusted shadow color */
-        }
-
-        .envelope::before {
-            content: "˚ʚ❤︎ɞ˚";
-            font-size: 5rem;
-            color: var(--color-accent);
-            position: absolute;
-            left: 50%;
-            top: 30%;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: multiply;
-            opacity: 0.3;
-        }
-
-        .envelope-flap {
-            width: 100%;
-            height: 71%;
-            position: absolute;
-            top: 0;
-            z-index: 3;
-            overflow: hidden;
-            transition: 0.6s linear all;
-            transform-origin: top;
-            pointer-events: all;
-        }
-
-        .envelope-folds {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 2;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-        }
-
-        .envelope-flap::before,
-        .envelope-left::before,
-        .envelope-right::before,
-        .envelope-bottom::before {
-            content: "";
-            transform: rotate(45deg);
-            background: var(--envelope-bg);
-            box-shadow: 0 0 30px -5px var(--envelope-shadow);
-            width: 100%;
-            aspect-ratio: 1;
-            display: block;
-            position: absolute;
-            top: 60%;
-        }
-
-        .envelope-flap::before {
-            border-radius: 5rem;
-            bottom: 30px;
-            border-radius: 5rem;
-            top: auto;
-        }
-
-        @media (min-width: 650px) {
-            .envelope-flap::before {
-                bottom: 100px;
-            }
-        }
-
-        .envelope-left::before {
-            top: 10%;
-            left: -65%;
-        }
-
-        .envelope-right::before {
-            top: 10%;
-            right: -65%;
-        }
-
-        .envelope-bottom::before {
-            top: 60%;
-            border-radius: 5rem;
-        }
-
-        .heart {
-            z-index: 10;
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: url('wax.png') no-repeat center center / contain;
-            border: none;
-            left: 50%;
-            top: 70%;
-            transform: translate(-50%, -50%);
+            perspective: 2000px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .heart::before,
-        .heart::after {
-            content: none;
-        }
-
-        @media (min-width: 650px) {
-            .heart {
-                width: 180px;
-                height: 180px;
-            }
-        }
-
-        .heart:hover,
-        .heart:active,
-        .heart:focus {
-            transform: translate(-50%, -50%);
-        }
-
-        .heart-text {
-            position: absolute;
-            bottom: -30px;
-            display: block;
-            color: var(--color-noir);
-            font-size: 0.8rem;
-            font-family: var(--font-display);
-            letter-spacing: 3px;
-            opacity: 0.6;
-        }
-
-        /* .envelope.active * {
-            pointer-events: none;
-        } REMOVED TO FIX DRAG */
-
-        .envelope.active .envelope-flap {
-            transform: rotateX(-180deg) translateY(0);
-            perspective: 10px;
-            pointer-events: none;
-        }
-
-        .envelope.active .envelope-flap::before {
-            box-shadow: inset 0 0 30px -5px var(--envelope-shadow);
-        }
-
-        .envelope.active .heart {
-            display: none;
-        }
-
-        .letter {
-            box-sizing: border-box;
-            font-family: var(--letter-font);
-            font-size: clamp(0.8rem, 3.5vw, 1.3rem);
-            line-height: 1.2;
-            background-color: var(--letter-bg);
-            color: var(--letter-text);
-            width: var(--letter-x);
-            height: var(--letter-y);
-            user-select: none;
-            box-shadow: inset 0 0 20px -5px var(--letter-shadow);
-            padding: 2.5rem 1rem 1rem;
-            margin: 0;
-            cursor: grab;
-            position: absolute;
-            top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            border: 0;
-            transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1;
-            left: 50%;
-            transform: translateX(-50%);
-            will-change: transform, top;
-        }
-
-        .letter.dragging {
-            transition: none !important;
-            will-change: transform;
-        }
-
-        .letter.no-padding {
-            padding: 0;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .letter.no-padding img {
+        .envelope-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
+        }
+
+        .envelope-container img {
+            position: absolute;
             width: 100%;
-            height: 100%;
+            height: 135%;
+            top: -27.5%;
             object-fit: cover;
+            object-position: center top;
+            display: block;
         }
 
-        .envelope.active .letter {
-            top: 3%;
-            /* Adjust if it needs to slide up slightly like the original */
+        .base {
+            z-index: 1;
+            transform: translateZ(-5px);
         }
 
-        .letter:active {
-            cursor: grabbing;
+        .lid-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            transform-origin: 50% 0%;
+            transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+            transform: translateZ(5px);
         }
 
-        .letter.center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        .envelope-card {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-5%);
+            width: 35vw;
+            max-width: 320px;
+            z-index: 2;
+            opacity: 0;
+            transition: all 5s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
         }
 
-        .letter cite {
-            font-size: 1.25rem;
-            color: var(--color-accent);
-            margin-top: 1rem;
+        .cssletter.open .envelope-card {
+            opacity: 1;
+            transform: translateX(-50%) translateY(12vh);
         }
 
-        .letter cite::before {
-            content: none;
-        }
+        @media (max-width: 768px) {
+            .envelope-card {
+                width: 70vw;
+                top: 20%;
+            }
 
-        .letter:nth-child(even) {
-            transform: translateX(-50%) skew(-2deg) translateY(-4px);
-        }
+            .envelope-container img {
+                height: 100vh;
+                object-fit: cover;
+                top: 0;
+            }
 
-        .letter:nth-child(odd) {
-            transform: translateX(-50%) skew(2deg) translateY(4px);
-        }
+            .cssletter.open .lid-container {
+                transform: translateZ(20px) rotateX(12deg);
+            }
 
-        @media (min-width: 650px) {
-            .letter {
-                font-size: 1.3rem;
+            .cssletter.open .envelope-card {
+                transform: translateX(-50%) translateY(10vh);
             }
         }
 
-        .closeLetter {
-            font-size: 0 !important;
+        .lid {
+            width: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* OPEN ANIMATION STATES */
+        .cssletter.open .lid-container {
+            transform: translateZ(40px) rotateX(14deg);
+        }
+
+        .cssletter.open .envelope-container {
+            transform: scale(1);
+        }
+
+        /* Hint Text */
+        .hint {
             position: absolute;
-            top: 1rem;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
-            background: none;
-            box-shadow: none;
-            padding: 0;
-            border: 0;
-            cursor: pointer;
+            color: #ffffff;
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            z-index: 100;
+            pointer-events: none;
+            text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+            font-family: var(--font-body);
         }
 
-        .closeLetter::before {
-            content: "˚ʚ❤︎ɞ˚";
-            font-size: 1.5rem !important;
-            font-family: var(--letter-font);
-            color: var(--letter-button-text);
-            text-align: center;
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
-        .closeLetter:hover,
-        .closeLetter:active,
-        .closeLetter:focus {
-            background-color: transparent;
-            color: var(--letter-text);
-            transform: translateX(-50%);
-            padding: 0;
-            margin: 0;
-        }
-
-        .closeLetter:hover::before,
-        .closeLetter:active::before,
-        .closeLetter:focus::before {
-            content: "xXx";
-        }
-
+        /* Letters & Cards */
         .letters {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%) scale(0.8);
+            width: auto;
+            height: auto;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease-in-out;
-            z-index: auto;
-            /* Remove stacking context so individual letters can jump to front */
-            /* Behind folds but in front of background */
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 50;
         }
 
         .letters.visible {
             opacity: 1;
             pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
         }
 
+        .letter-card {
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90vw;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .letter-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: none;
+            /* Keep original color for the invitation text */
+        }
+
+        /* Enter Site Button */
         .enter-site-btn {
             position: fixed;
-            bottom: 40px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 100000;
+            z-index: 100002;
             opacity: 0;
             pointer-events: none;
             transition: all 0.5s ease-in-out;
-            background: var(--color-noir);
-            color: var(--color-white);
-            border: 1px solid var(--color-accent);
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border: none;
             padding: 1.2rem 3rem;
             font-family: var(--font-display);
             font-weight: 800;
             letter-spacing: 4px;
             text-transform: uppercase;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border-radius: 50px;
-            /* More like a 'hard' prominent button */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
             cursor: pointer;
-        }
-
-        .enter-site-btn:hover {
-            background: var(--color-white);
-            transform: translateX(-50%) translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
         }
 
         .enter-site-btn.visible {
             opacity: 1;
             pointer-events: all;
         }
+
+        .enter-site-btn:hover {
+            background: #000;
+            color: #fff;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
 
         /* --- NAVIGATION --- */
         header {
@@ -1704,117 +1539,17 @@
             type="audio/mpeg">
     </audio>
 
-    <!-- NEW ENVELOPE OVERLAY -->
-    <section class="cssletter" id="envelope-section">
-        <div class="envelope">
-            <button class="heart" id="openEnvelope" aria-label="Open Envelope">
-            </button>
-            <div class="envelope-flap"></div>
-            <div class="letters">
-                <!-- Main Invitation Card (Always on top) -->
-                <blockquote class="letter center invitation-card" id="l0" tabindex="0">
-                    <p
-                        style="font-family: var(--font-serif); font-weight: 600; font-size: 1.2rem; margin-bottom: 1rem;">
-                        The Wedding Invitation</p>
-                    <p>Together with our families, we request the honor of your presence as we celebrate our marriage.
-                    </p>
-                    <p style="margin-top: 1rem; font-weight: bold; color: var(--color-accent);">MAY 14, 2026</p>
-                    <cite>Nayani & Supun</cite>
-                </blockquote>
-
-                <!-- Infinite Cards -->
-                <blockquote class="letter center" id="l1" tabindex="0">
-                    <p>Two hearts, one love.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l2" tabindex="0">
-                    <p>Forever starts today.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l3" tabindex="0">
-                    <p>Together is a beautiful place to be.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l4" tabindex="0">
-                    <p>And so the adventure begins.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l5" tabindex="0">
-                    <p>Love is the bridge between two hearts.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l6" tabindex="0">
-                    <p>To have and to hold.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l7" tabindex="0">
-                    <p>A true love story never ends.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l8" tabindex="0">
-                    <p>You are my today and all of my tomorrows.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l9" tabindex="0">
-                    <p>Love is composed of a single soul inhabiting two bodies.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l10" tabindex="0">
-                    <p>The best is yet to be.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l11" tabindex="0">
-                    <p>Happiness is being married to your best friend.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l12" tabindex="0">
-                    <p>Once in a while, right in the middle of an ordinary life, love gives us a fairy tale.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l13" tabindex="0">
-                    <p>Every love story is beautiful, but ours is my favorite.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l14" tabindex="0">
-                    <p>Grow old along with me; the best is yet to be.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l15" tabindex="0">
-                    <p>I feel like everything in my life has led me to you.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l16" tabindex="0">
-                    <p>In you, I've found the love of my life and my closest, truest friend.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l17" tabindex="0">
-                    <p>My heart is and always will be yours.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l18" tabindex="0">
-                    <p>We loved with a love that was more than love.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l19" tabindex="0">
-                    <p>God's promises never fail, and this love is living proof.</p>
-                    <cite>C & C</cite>
-                </blockquote>
-                <blockquote class="letter center" id="l20" tabindex="0">
-                    <p>May 14th, 2026<br>Grandeeza</p>
-                    <cite>C & C</cite>
-                </blockquote>
-            </div>
-            <div class="envelope-folds">
-                <div class="envelope-left"></div>
-                <div class="envelope-right"></div>
-                <div class="envelope-bottom"></div>
+    <!-- NEW IMAGE-BASED ENVELOPE OVERLAY -->
+    <section class="cssletter" id="envelope-section" onclick="toggleOpen()">
+        <div class="envelope-container">
+            <img src="base.png" alt="Envelope Base" class="base">
+            <img src="text.png" alt="Wedding Invitation" class="envelope-card">
+            <div class="lid-container">
+                <img src="lid.png" alt="Envelope Lid" class="lid">
             </div>
         </div>
 
-        <!-- ENTER BUTTON -->
-        <button id="enterSiteBtn" class="enter-site-btn" style="font-size: 0.9rem;">
-            Initialize The Wedding
-        </button>
+        <div class="hint">Click to Open</div>
     </section>
 
     <!-- MAIN SITE -->
@@ -1855,9 +1590,7 @@
                             style="font-family: var(--font-script); text-transform: none; letter-spacing: 0;">&</span>
                         Chamika</h1>
                     <p class="hero-date reveal" style="font-style: italic; margin-top: 2rem;">May 14th, 2026</p>
-                    <p class="hero-date reveal"
-                        style="font-style: normal; text-transform: uppercase; margin-top: 1rem; color: var(--color-accent);">
-                        Grandeeza, Negombo</p>
+
                 </div>
             </section>
 
@@ -1915,9 +1648,7 @@
                                     style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.9rem; color: var(--color-accent); font-family: var(--font-body); margin-bottom: 1.5rem;">
                                     2026
                                 </p>
-                                <p style="font-size: 1.1rem; color: #666; font-style: italic;">
-                                    Negombo, Sri Lanka
-                                </p>
+
                             </div>
 
                             <div class="lux-border" style="display: inline-block; padding: 2rem 4rem;">
@@ -1956,10 +1687,11 @@
                     <div class="timeline-container">
                         <div class="timeline-line"></div>
 
+                        <!-- Event Timeline Content Class Update (Removing reveal class from cards to handle them specifically in GSAP) -->
                         <!-- Event 1 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-content reveal">
+                            <div class="timeline-content">
                                 <span class="timeline-time">06:30 PM</span>
                                 <h3 class="timeline-title">Reception Begins</h3>
                                 <p class="timeline-desc">The celebration begins with drinks, dancing, and good company.
@@ -1970,7 +1702,7 @@
                         <!-- Event 2 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-content reveal">
+                            <div class="timeline-content">
                                 <span class="timeline-time">07:00 PM</span>
                                 <h3 class="timeline-title">Toasts and Cheers</h3>
                                 <p class="timeline-desc">Let's raise our glasses to love, laughter, and happily ever
@@ -1981,7 +1713,7 @@
                         <!-- Event 3 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-content reveal">
+                            <div class="timeline-content">
                                 <span class="timeline-time">08:30 PM</span>
                                 <h3 class="timeline-title">Dinner</h3>
                                 <p class="timeline-desc">Indulge in a delicious meal, carefully prepared to delight your
@@ -1992,7 +1724,7 @@
                         <!-- Event 4 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-content reveal">
+                            <div class="timeline-content">
                                 <span class="timeline-time">09:30 PM</span>
                                 <h3 class="timeline-title">Dancing & Celebration</h3>
                                 <p class="timeline-desc">Let the music move you! We’ll keep the dance floor alive with
@@ -2003,7 +1735,7 @@
                         <!-- Event 5 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-content reveal">
+                            <div class="timeline-content">
                                 <span class="timeline-time">11:30 PM</span>
                                 <h3 class="timeline-title">Send-Off</h3>
                                 <p class="timeline-desc">As the night winds down, we’ll share one last special moment as
@@ -2158,12 +1890,17 @@
 
                             <button type="submit" class="btn-lux">Confirm Attendance</button>
                         </form>
+
                     </div>
                 </div>
             </section>
         </main>
 
         <footer>
+            <p
+                style="font-family: var(--font-script); font-size: 1.8rem; color: var(--color-accent); margin-bottom: 2rem; max-width: 90%; margin-inline: auto; padding: 0 2rem; line-height: 1.4;">
+                we are counting down the days to cheer our forever with you, thank you, with love
+            </p>
             <div class="footer-logo">C & C</div>
             <p class="footer-date">14 . 05 . 2026</p>
             <p style="margin-top: 4rem; font-size: 0.7rem; opacity: 0.4; letter-spacing: 2px;">DESIGN BY NOVEXIS STUDIO
@@ -2192,126 +1929,63 @@
             const navLinks = document.querySelectorAll('.nav-list a');
             const musicToggle = document.getElementById('musicToggle');
             const musicIcon = document.getElementById('musicIcon');
-            const enterSiteBtn = document.getElementById('enterSiteBtn');
-            const envelopeSection = document.getElementById('envelope-section');
 
-            // --- 1. NEW ENVELOPE LOGIC ---
-            const letters = document.querySelectorAll(".letter");
-            const lettersContainer = document.querySelector(".letters");
-            let zIndexCounter = 20000;
-
-            const shuffleArray = (array) => {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            };
-
-            const shuffledThings = Array.from(letters).filter(l => !l.classList.contains('invitation-card'));
-            shuffleArray(shuffledThings);
-
-            // Add shuffled cards first
-            shuffledThings.forEach((letter) => {
-                lettersContainer.appendChild(letter);
-            });
-
-            // Add invitation card last so it's on top
-            const invitationCard = document.querySelector(".invitation-card");
-            if (invitationCard) {
-                lettersContainer.appendChild(invitationCard);
-            }
-
-            letters.forEach((letter) => {
-
-                const startDrag = (e) => {
-                    if (e.target.tagName === "BUTTON") return;
-
-                    const isTouch = e.type === "touchstart";
-                    if (!isTouch) e.preventDefault(); // Prevent text selection on desktop
-
-                    const pageX = isTouch ? e.touches[0].clientX : e.clientX;
-                    const pageY = isTouch ? e.touches[0].clientY : e.clientY;
-
-                    const rect = letter.getBoundingClientRect();
-
-                    letter.style.zIndex = zIndexCounter++;
-
-                    // Freeze at current position and switch to fixed for dragging
-                    letter.style.position = "fixed";
-                    letter.style.left = `${rect.left}px`;
-                    letter.style.top = `${rect.top}px`;
-                    letter.style.margin = "0";
-                    letter.style.transform = "translate3d(0, 0, 0)";
-                    letter.classList.add("dragging");
-
-                    const offsetX = pageX;
-                    const offsetY = pageY;
-
-                    const onMove = (moveEvent) => {
-                        const curX = isTouch ? moveEvent.touches[0].clientX : moveEvent.clientX;
-                        const curY = isTouch ? moveEvent.touches[0].clientY : moveEvent.clientY;
-
-                        const dx = curX - offsetX;
-                        const dy = curY - offsetY;
-
-                        // Use translate3d for GPU acceleration and smoothness
-                        letter.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-                    };
-
-                    const onEnd = () => {
-                        document.removeEventListener("mousemove", onMove);
-                        document.removeEventListener("mouseup", onEnd);
-                        document.removeEventListener("touchmove", onMove);
-                        document.removeEventListener("touchend", onEnd);
-                        letter.classList.remove("dragging");
-                    };
-
-                    document.addEventListener("mousemove", onMove);
-                    document.addEventListener("mouseup", onEnd);
-                    if (isTouch) {
-                        document.addEventListener("touchmove", onMove, { passive: false });
-                        document.addEventListener("touchend", onEnd);
-                    }
-                };
-
-                letter.addEventListener("mousedown", startDrag);
-                letter.addEventListener("touchstart", startDrag, { passive: false });
-            });
-
-            const openEnvelopeBtn = document.querySelector("#openEnvelope");
-            if (openEnvelopeBtn) {
-                openEnvelopeBtn.addEventListener("click", () => {
-                    document.querySelector(".envelope").classList.add("active");
-                    // Play music when envelope opens
+            // --- AUTO-PLAY MUSIC START AT 5S ---
+            const startMusic = () => {
+                if (music.paused) {
+                    music.currentTime = 5;
                     music.volume = 0.3;
                     music.play().catch(() => { });
+                    document.removeEventListener('click', startMusic);
+                    document.removeEventListener('touchstart', startMusic);
+                }
+            };
+            document.addEventListener('click', startMusic);
+            document.addEventListener('touchstart', startMusic);
+            // --- NEW ENVELOPE LOGIC ---
+            function toggleOpen() {
+                const section = document.getElementById('envelope-section');
+                const site = document.getElementById('main-site');
+                const music = document.getElementById('music');
+                const hint = document.querySelector('.hint');
 
-                    // Show letters and Enter Site Button immediately
-                    lettersContainer.classList.add('visible');
-                    enterSiteBtn.classList.add('visible');
-                });
-            }
+                if (section.classList.contains('open')) return;
 
-            // Enter Site Button Logic
-            if (enterSiteBtn) {
-                enterSiteBtn.addEventListener('click', () => {
-                    // Fade out envelope section
-                    gsap.to(envelopeSection, {
-                        opacity: 0,
-                        duration: 1.5,
-                        onStart: () => {
-                            site.style.display = "block";
-                        },
-                        onComplete: () => {
-                            envelopeSection.style.display = "none";
-                            document.body.classList.remove('locked');
-                            initScrollAnimations();
-                        }
-                    });
-                    // Fade in main site
-                    gsap.to(site, { opacity: 1, duration: 1 });
+                section.classList.add('open');
+
+                // Play music when envelope opens (Start at 5s)
+                music.currentTime = 5;
+                music.volume = 0.3;
+                music.play().catch(() => { });
+
+                // Automatic transition to site
+                // Lid takes 5s to open to 14deg. Start fade out at 3.5s
+                gsap.to(section, {
+                    opacity: 0,
+                    duration: 1.5,
+                    delay: 3.5,
+                    onStart: () => {
+                        site.style.display = "block";
+                    },
+                    onComplete: () => {
+                        section.style.display = "none";
+                        document.body.classList.remove('locked');
+                        initScrollAnimations();
+                    }
                 });
+
+                // Fade in main site
+                gsap.to(site, { opacity: 1, duration: 1, delay: 4 });
+
+                // Hide hint
+                if (hint) {
+                    hint.style.opacity = "0";
+                    setTimeout(() => hint.remove(), 500);
+                }
             }
+            window.toggleOpen = toggleOpen;
+
+
 
 
             // --- 3. SCROLL ANIMATIONS ---
@@ -2354,6 +2028,43 @@
                                 toggleActions: "play none none none"
                             },
                             delay: i % 3 * 0.1 // Slight stagger for items in grid
+                        }
+                    );
+                });
+
+                // --- TIMELINE CARDS ANIMATION ---
+                gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+                    const content = item.querySelector('.timeline-content');
+                    const dot = item.querySelector('.timeline-dot');
+                    const isEven = i % 2 === 1;
+
+                    // Animate Dot
+                    gsap.fromTo(dot,
+                        { scale: 0, opacity: 0 },
+                        {
+                            scale: 1,
+                            opacity: 1,
+                            duration: 0.8,
+                            scrollTrigger: {
+                                trigger: item,
+                                start: "top 85%"
+                            }
+                        }
+                    );
+
+                    // Animate Content (Slide in from sides)
+                    gsap.fromTo(content,
+                        { x: isEven ? 100 : -100, opacity: 0 },
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 1.5,
+                            ease: "power4.out",
+                            scrollTrigger: {
+                                trigger: item,
+                                start: "top 85%",
+                                toggleActions: "play none none none"
+                            }
                         }
                     );
                 });
@@ -2475,4 +2186,3 @@
 </body>
 
 </html>
-
