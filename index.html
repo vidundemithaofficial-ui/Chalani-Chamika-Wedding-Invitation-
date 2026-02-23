@@ -504,7 +504,7 @@
         .envelope-container .base,
         .envelope-container .lid {
             position: absolute;
-            width: 100%;
+            width: 101%;
             height: 135%;
             top: -27.5%;
             object-fit: cover;
@@ -520,8 +520,8 @@
         .lid-container {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: -1%;
+            width: 101%;
             height: 100%;
             z-index: 3;
             transform-origin: 50% 0%;
@@ -539,7 +539,7 @@
             max-width: 320px;
             z-index: 2;
             opacity: 0;
-            transition: all 5s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 6s cubic-bezier(0.25, 1, 0.5, 1);
             pointer-events: none;
         }
 
@@ -578,7 +578,7 @@
 
         /* OPEN ANIMATION STATES */
         .cssletter.open .lid-container {
-            transform: translateZ(40px) rotateX(14deg);
+            transform: translateZ(40px) rotateX(15deg);
         }
 
         .cssletter.open .envelope-container {
