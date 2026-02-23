@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chalani & Chamika | The Wedding</title>
+    <title>Chamika & Chamila | The Wedding</title>
 
     <!-- Icons & Fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -501,7 +501,8 @@
             transition: transform 0.8s ease;
         }
 
-        .envelope-container img {
+        .envelope-container .base,
+        .envelope-container .lid {
             position: absolute;
             width: 100%;
             height: 135%;
@@ -553,7 +554,8 @@
                 top: 20%;
             }
 
-            .envelope-container img {
+            .envelope-container .base,
+            .envelope-container .lid {
                 height: 100vh;
                 object-fit: cover;
                 top: 0;
@@ -994,7 +996,7 @@
             background: var(--color-white);
             position: relative;
             overflow: hidden;
-            z-index: 10;
+            z-index: 12;
             /* Higher than pinned countdown */
             box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
             /* Add a shadow to emphasize 'coming over' */
@@ -1002,7 +1004,10 @@
 
         .venue-parallax-bg {
             position: absolute;
-            inset: -20% 0;
+            top: -15%;
+            left: 0;
+            width: 100%;
+            height: 130%;
             background-image: url('kkgb.jpg');
             background-size: cover;
             background-position: center;
@@ -1010,6 +1015,7 @@
             pointer-events: none;
             z-index: 1;
             filter: grayscale(100%);
+            will-change: transform;
         }
 
         .venue-grid {
@@ -1212,6 +1218,8 @@
         .gallery-wrap {
             padding: var(--spacing-lg) 0;
             background: var(--color-bg);
+            position: relative;
+            z-index: 12;
         }
 
         .gallery-row {
@@ -1314,6 +1322,7 @@
             color: var(--color-white);
             position: relative;
             overflow: hidden;
+            z-index: 12;
         }
 
         .flower-decor {
@@ -1351,7 +1360,8 @@
         }
 
         .input-group input,
-        .input-group select {
+        .input-group select,
+        .input-group textarea {
             width: 100%;
             background: transparent;
             border: none;
@@ -1368,8 +1378,14 @@
             appearance: none;
         }
 
+        .input-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
         .input-group input:focus,
-        .input-group select:focus {
+        .input-group select:focus,
+        .input-group textarea:focus {
             border-color: var(--color-accent);
         }
 
@@ -1399,7 +1415,9 @@
         .input-group input:focus+label,
         .input-group input:not(:placeholder-shown)+label,
         .input-group select:focus+label,
-        .input-group select:valid+label {
+        .input-group select:valid+label,
+        .input-group textarea:focus+label,
+        .input-group textarea:not(:placeholder-shown)+label {
             top: -1.5rem;
             font-size: 0.6rem;
             color: var(--color-accent);
@@ -1423,6 +1441,85 @@
         .btn-lux:hover {
             background: var(--color-white);
             transform: translateY(-3px);
+        }
+
+        /* --- DRESS CODE SECTION --- */
+        .dress-code-section {
+            padding: var(--spacing-lg) 0;
+            background: var(--color-bg);
+            /* Consistent with other light sections */
+            position: relative;
+            z-index: 12;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dress-code-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .dress-code-image {
+            position: relative;
+            text-align: center;
+        }
+
+        .dress-code-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.1);
+            /* Noir feel */
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .dress-code-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .dress-code-content {
+            padding: 2rem;
+        }
+
+        .dress-code-tag {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: var(--color-noir);
+            text-transform: uppercase;
+            margin-top: 2rem;
+            padding: 1.5rem 3rem;
+            border: 1px solid var(--color-accent);
+            display: inline-block;
+            position: relative;
+        }
+
+        .dress-code-tag::before {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border: 1px solid var(--color-accent);
+            opacity: 0.3;
+        }
+
+        @media (max-width: 992px) {
+            .dress-code-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+
+            .dress-code-content {
+                padding: 0;
+            }
+
+            .dress-code-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
         }
 
         /* --- FOOTER --- */
@@ -1534,8 +1631,7 @@
 
     <!-- AUDIO -->
     <audio id="music" loop>
-        <source
-            src="Background Music For Wedding Videos - Romantic Piano Instrumental - Vens Adams.mp3"
+        <source src="Background Music For Wedding Videos - Romantic Piano Instrumental - Vens Adams.mp3"
             type="audio/mpeg">
     </audio>
 
@@ -1573,6 +1669,7 @@
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#location">Venue</a></li>
+                <li><a href="#attire">Dress Code</a></li>
                 <li><a href="#rsvp">RSVP</a></li>
             </ul>
         </div>
@@ -1584,12 +1681,13 @@
                     style="filter: grayscale(100%) contrast(1.2) brightness(0.6);">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <p class="hero-date reveal" style="font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 3rem;">
+                    <p class="hero-date"
+                        style="font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 3rem; opacity: 0;">
                         We're getting married</p>
-                    <h1 class="hero-title reveal">Chalani <span
+                    <h1 class="hero-title" style="opacity: 0;">Chamika <span
                             style="font-family: var(--font-script); text-transform: none; letter-spacing: 0;">&</span>
-                        Chamika</h1>
-                    <p class="hero-date reveal" style="font-style: italic; margin-top: 2rem;">May 14th, 2026</p>
+                        Chamila</h1>
+                    <p class="hero-date" style="font-style: italic; margin-top: 2rem; opacity: 0;">May 14th, 2026</p>
 
                 </div>
             </section>
@@ -1630,9 +1728,9 @@
                             <div style="margin: 3rem 0;">
                                 <h3
                                     style="font-family: var(--font-script); font-size: clamp(2.2rem, 8vw, 5rem); color: var(--color-accent); line-height: 0.8; font-weight: 400; margin-bottom: 0.5rem;">
-                                    Chalani <span
+                                    Chamika <span
                                         style="font-family: var(--font-serif); font-size: 1.8rem; vertical-align: middle; color: var(--color-noir);">&</span>
-                                    Chamika
+                                    Chamila
                                 </h3>
                                 <div
                                     style="width: 60px; height: 1px; background: var(--color-accent); margin: 2rem auto;">
@@ -1660,10 +1758,7 @@
                                     Hotel</span>
                             </div>
 
-                            <p
-                                style="margin-top: 3rem; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 4px; color: #888; text-transform: uppercase;">
-                                Reception to follow immediately
-                            </p>
+
                         </div>
 
                         <div class="editorial-img-wrapper reveal" style="position: relative;">
@@ -1771,7 +1866,7 @@
                     </div>
 
                     <div class="calendar-btn-wrap">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Chalani+%26+Chamika&dates=20260514T040000Z/20260514T170000Z&details=We+are+delighted+to+invite+you+to+our+wedding+celebration.&location=Grandeeza+Hotel%2C+Negombo"
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Chamika+%26+Chamila&dates=20260514T040000Z/20260514T170000Z&details=We+are+delighted+to+invite+you+to+our+wedding+celebration.&location=Grandeeza+Hotel%2C+Negombo"
                             target="_blank" class="cool-btn">
                             <span class="material-icons-outlined"
                                 style="vertical-align: middle; margin-right: 8px;">event</span>
@@ -1854,25 +1949,20 @@
 
                 <div class="container">
                     <div class="rsvp-form-card reveal">
-                        <span class="editorial-label">RSVP</span>
+                        <span class="editorial-label"
+                            style="font-size: 1.5rem; letter-spacing: 8px; margin-bottom: 3rem;">RSVP</span>
                         <h2 class="editorial-heading" style="color: var(--color-white);">Join Our Story</h2>
                         <p style="margin-bottom: 4rem; opacity: 0.7;">Kindly respond by April 1st, 2026</p>
 
                         <form id="rsvpForm">
                             <div class="input-group">
                                 <input type="text" id="name" name="name" required placeholder=" " autocomplete="off">
-                                <label for="name">Full Name</label>
+                                <label for="name">Your Name</label>
                             </div>
 
                             <div class="input-group">
-                                <select id="seats" name="seats" required>
-                                    <option value="" disabled selected></option>
-                                    <option value="1">1 Guest</option>
-                                    <option value="2">2 Guests</option>
-                                    <option value="3">3 Guests</option>
-                                    <option value="4">4+ Guests</option>
-                                </select>
-                                <label for="seats">Number of Guests</label>
+                                <textarea id="message" name="message" placeholder=" "></textarea>
+                                <label for="message">Message for the Couple</label>
                             </div>
 
                             <div style="display: flex; gap: 2rem; justify-content: center; margin: 3rem 0;">
@@ -1894,6 +1984,33 @@
                     </div>
                 </div>
             </section>
+
+            <!-- DRESS CODE -->
+            <section class="dress-code-section" id="attire">
+                <div class="container">
+                    <div class="dress-code-grid">
+                        <div class="dress-code-image reveal">
+                            <img src="dress.png" alt="Dress Code Attire"
+                                style="width: 100%; max-width: 500px; display: block; margin: 0 auto; filter: grayscale(100%); background: transparent; box-shadow: none; border: none; padding: 0;">
+                        </div>
+                        <div class="dress-code-content reveal">
+                            <span class="editorial-label">The Aesthetic</span>
+                            <h2 class="editorial-heading">Dress Code</h2>
+                            <p class="editorial-p">
+                                To complement our vision of a timeless celebration at <strong>Grandeeza</strong>, we
+                                kindly request our guests to join us in their finest <strong>Black Formal</strong>
+                                attire.
+                                <br><br>
+                                Let us create a unified, elegant atmosphere as we celebrate this special chapter in
+                                style.
+                            </p>
+                            <div class="dress-code-tag">
+                                <span>Formal Black Tie</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
@@ -1904,6 +2021,7 @@
             <div class="footer-logo">C & C</div>
             <p class="footer-date">14 . 05 . 2026</p>
             <p style="margin-top: 4rem; font-size: 0.7rem; opacity: 0.4; letter-spacing: 2px;">DESIGN BY NOVEXIS STUDIO
+                <br> +94785803917
             </p>
         </footer>
 
@@ -1990,6 +2108,18 @@
 
             // --- 3. SCROLL ANIMATIONS ---
             function initScrollAnimations() {
+                // Hero Section Entrance (All at once)
+                gsap.fromTo('.hero-content > *',
+                    { y: 40, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1.5,
+                        ease: "power4.out",
+                        stagger: 0 // No delay between items
+                    }
+                );
+
                 // Header Background & Logo Color
                 ScrollTrigger.create({
                     start: "top -50", // Earlier transition
@@ -2083,17 +2213,20 @@
                     });
                 });
 
-                // Venue Background Parallax
-                gsap.to('.venue-parallax-bg', {
-                    yPercent: 20,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: '.venue-section',
-                        scrub: true,
-                        start: "top bottom",
-                        end: "bottom top"
+                // Venue Background Parallax (Improved Stability)
+                gsap.fromTo('.venue-parallax-bg',
+                    { yPercent: -10 },
+                    {
+                        yPercent: 10,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: '.venue-section',
+                            scrub: true,
+                            start: "top bottom",
+                            end: "bottom top"
+                        }
                     }
-                });
+                );
 
                 // --- COUNTDOWN LOGIC ---
                 const weddingDate = new Date("May 14, 2026 09:30:00").getTime();
@@ -2165,7 +2298,7 @@
 
                     // SheetDB logic integration
                     const formData = new FormData(form);
-                    fetch('https://sheetdb.io/api/v1/5u9yrdv1rr0ux', {
+                    fetch('https://sheetdb.io/api/v1/hfhzcg5eunhss', {
                         method: 'POST',
                         body: formData,
                     })
